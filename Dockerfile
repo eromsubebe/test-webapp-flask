@@ -19,11 +19,14 @@
 
 # CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0" "--port=8080"]
 
-FROM python:3.8-slim-buster
+FROM ubuntu:18.04
+
+RUN apt-get update && apt-get install -y python3 python3-pip
 
 WORKDIR /opt
 
 COPY requirements.txt /opt/requirements.txt
+
 RUN pip3 install flask
 
 COPY app.py /opt/
