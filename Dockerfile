@@ -19,15 +19,8 @@
 
 # CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0" "--port=8080"]
 
-FROM ubuntu:18.04
-
-WORKDIR /opt
-
+FROM ubuntu:16.04
+RUN apt-get update && apt-get install -y python python-pip
+RUN pip install flask
 COPY app.py /opt/
-
-RUN apt-get update && apt-get install -y software-properties-common gcc && \
-    add-apt-repository -y ppa:deadsnakes/ppa
-
-RUN apt-get update && apt-get install -y python3.8 python3-distutils python3-pip python3-apt && python3.8 -m pip install flask
-
 ENTRYPOINT FLASK_APP=/opt/app.py flask run --host=0.0.0.0 --port=8080
